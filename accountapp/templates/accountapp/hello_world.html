@@ -6,6 +6,13 @@
   <div style="margin:  2rem; text-align: center">
     <h1>METHOD</h1>
 
+      <from action="/accounts/hello_world/" method="post">
+          {% csrf_token %}
+          <input class="btn btn-dark rounded-pill px-4" type = "submit">
+
+
+      </from>
+
     <h3>{{ text }}</h3>
 
 
