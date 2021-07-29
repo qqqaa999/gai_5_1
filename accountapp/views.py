@@ -13,7 +13,8 @@ from accountapp.decorators import account_ownership_required
 from accountapp.forms import AccountCreationForm
 from accountapp.models import HelloWorld
 
-@login_required(login_url=reverse_lazy('accountapp:login'))
+
+@login_required
 def hello_world(request):
     if request.method == "POST":
         temp = request.POST.get('hello_world_input')
@@ -26,21 +27,25 @@ def hello_world(request):
         return render(request, 'accountapp/hello_world.html',
                       context={'hello_world_list': hello_world_list})
 
+
 class AccountCreateView(CreateView):
     model = User
     form_class = UserCreationForm
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/create.html'
 
+
 class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user'
     template_name = 'accountapp/detail.html'
 
-has_ownership = [login_required,account_ownership_required]
 
-@method_decorator(has_ownership,'get')
-@method_decorator(has_ownership,'post')
+has_ownership = [login_required, account_ownership_required]
+
+
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountUpdateView(UpdateView):
     model = User
     form_class = AccountCreationForm
@@ -48,8 +53,12 @@ class AccountUpdateView(UpdateView):
     success_url = reverse_lazy('accountapp:hello_world')
     template_name = 'accountapp/update.html'
 
-@method_decorator(has_ownership,'get')
-@method_decorator(has_ownership,'post')
+    def get_success_url(self):
+        return reverse('accountapp:detail', kwargs={'pk': self.object.pk})
+
+
+@method_decorator(has_ownership, 'get')
+@method_decorator(has_ownership, 'post')
 class AccountDeleteView(DeleteView):
     model = User
     context_object_name = 'target_user'
