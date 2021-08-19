@@ -32,12 +32,17 @@
                class="material-icons round_button mx-2">
                 settings
             </a>
-        <a href="{% url 'accountapp:delete' pk=target_user.pk %}"
-                class="material-icons round_button mx-2">
+
+            <a href="{% url 'accountapp:delete' pk=target_user.pk %}"
+               class="material-icons round_button mx-2">
                 close
-        </a>
+            </a>
         </div>
         {% endif %}
+    </div>
+
+    <div>
+        {% include 'snippets/list_fragment.html' with article_list=object_list %}
     </div>
 
 
