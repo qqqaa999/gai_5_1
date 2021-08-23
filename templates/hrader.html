@@ -1,10 +1,9 @@
-<div style="text-align: center; background-color: cornflowerblue;font-family: 'Otomanopee One', sans-serif;">
+<div style="text-align: center">
 
     <div class="pragmatic_header_logo">
-        <h1>JuBee</h1>
+        <h1>Pragmatic</h1>
     </div>
-    <div style=" margin-bottom: 2rem;font-family: 'Otomanopee One', sans-serif;">
-
+    <div class="pragmatic_header_button">
         <span>
             <a href="{% url 'articleapp:list' %}">
                 Articles
@@ -15,33 +14,34 @@
                 Projects
             </a>
         </span>
-        {% if not user.is_authenticated %}
-            <span>
-                <a href="{% url 'accountapp:login' %}">
-                    Login
-                </a>
-            </span>
+        <span>
+            <a href="{% url 'subscribeapp:list' %}">
+                Subscription
+            </a>
+        </span>
 
-            <span>
-                <a href="{% url 'accountapp:create' %}">
-                    Sign Up
-                </a>
-            </span>
+        {% if not user.is_authenticated  %}
+        <span>
+            <a href="{% url 'accountapp:login' %}">
+                Login
+            </a>
+        </span>
+        <span>
+            <a href="{% url 'accountapp:create' %}">
+                SignUp
+            </a>
+        </span>
         {% else %}
-            <span>
-                <a href="{% url 'accountapp:detail' pk=user.pk %}">
-                    Mypage
-                </a>
-
-            </span>
-
-            <span>
-                <a href="{% url 'accountapp:logout' %}">
-                    logout
-                </a>
-
-            </span>
-
+        <span>
+            <a href="{% url 'accountapp:detail' pk=user.pk %}">
+                Mypage
+            </a>
+        </span>
+        <span>
+            <a href="{% url 'accountapp:logout' %}">
+                Logout
+            </a>
+        </span>
         {% endif %}
     </div>
 
